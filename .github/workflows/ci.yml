@@ -15,9 +15,21 @@ jobs:
       run: |
         npm install
         npm run-script build
+
+    # 部署到gh-pages
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
         FOLDER: build
+
+    # 设置阿里云OSS的 id/secret，存储到 github 的 secrets 中
+    - name: setup aliyun oss
+      uses: manyuanrong/setup-ossutil@master
+      with:
+        endpoint: oss-cn-guangzhou.aliyuncs.com
+        access-key-id: ${{ secrets.ALIYUN_OSS_KEY_ID }}
+        access-key-secret: ${{ secrets.OSS_KEY_SEALIYUN_OSS__KEY_SECRETCRET }}
+    - name: cp files to aliyun
+      run: ossutil cp -rf dist oss://github-action-demo/
