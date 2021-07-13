@@ -49,13 +49,16 @@ jobs:
           source: "transfer_files.tar.gz"
           target: "/home"
 
-      # - name: Exec deploy script with SSH
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     command_timeout: 8m
-      #     host: ${{ secrets.ALIYUM_HOST }}
-      #     username: ${{ secrets.ALIYUM_USER }}
-      #     password: ${{ secrets.ALIYUM_PWD }}
-      #     port: ${{secrets.ALIYUM_PORT }}
-      #     # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
-      #     script: sh /home/runner/work/github-actions-demo/github-actions-demo/.deploy/main.sh
+      - name: Exec deploy script with SSH
+        uses: appleboy/ssh-action@master
+        with:
+          command_timeout: 8m
+          host: ${{ secrets.ALIYUM_HOST }}
+          username: ${{ secrets.ALIYUM_USER }}
+          password: ${{ secrets.ALIYUM_PWD }}
+          port: ${{secrets.ALIYUM_PORT }}
+          # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
+          # script: sh /home/runner/work/github-actions-demo/github-actions-demo/.deploy/main.sh
+          script: |
+          cd /home
+          tar -zxvf /home/transfer_files.tar.gz
