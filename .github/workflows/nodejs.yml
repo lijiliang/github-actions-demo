@@ -42,10 +42,10 @@ jobs:
       - name: Scp file to aliyun
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.DOCKER_IP_DEV }}
-          username: ${{ secrets.DOCKER_ID }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          port: ${{ secrets.DOCKER_PORT }}
+          host: ${{ secrets.ALIYUM_HOST }}
+          username: ${{ secrets.ALIYUM_USER }}
+          password: ${{ secrets.ALIYUM_PWD }}
+          port: ${{ secrets.ALIYUM_PORT }}
           source: "transfer_files.tar.gz"
           target: "/home"
 
