@@ -57,9 +57,7 @@ jobs:
           port: ${{secrets.ALIYUM_PORT }}
           # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
           script: |
-            cd /home
-            mkdir docker-koa
-            tar -zxvf /home/docker-koa/docker-koa.tar.gz
             cd /home/docker-koa
+            tar -zxvf /home/docker-koa.tar.gz
             docker-compose up -d --force-recreate --build
 
