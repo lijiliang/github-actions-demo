@@ -24,7 +24,7 @@ services:
                         - static:/code/static
                 restart: always
         mysql:
-                image: mysql:5.6
+                image: mysql:5.7
                 env_file: .env
                 volumes:
                         - db:/var/lib/mysql
