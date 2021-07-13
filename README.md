@@ -1,7 +1,24 @@
-This repo is a GitHub Actions demo of publishing a React App into GitHub Pages.
+# blog-front
 
-View the [workflow file](./.github/workflows/ci.yml) and the [published website](https://ruanyf.github.io/github-actions-demo).
+> blog front use nuxtjs
 
-Read the details in [my blog](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html) (in Chinese).
+## Build Setup
 
-## Github action
+``` bash
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:3000
+$ yarn run dev
+
+# build for production and launch server
+$ yarn run build
+$ yarn start
+
+# generate static project
+$ yarn run generate
+```
+
+### Action
+
+> use github action
