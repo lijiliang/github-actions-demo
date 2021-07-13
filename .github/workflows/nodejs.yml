@@ -60,5 +60,5 @@ jobs:
           # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
           # script: sh /home/runner/work/github-actions-demo/github-actions-demo/.deploy/main.sh
           script: |
-          cd /home
-          tar -zxvf /home/transfer_files.tar.gz
+            cd /home
+            tar -zxvf /home/transfer_files.tar.gz
