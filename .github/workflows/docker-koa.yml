@@ -58,6 +58,6 @@ jobs:
           # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
           script: |
             cd /home/docker-koa
-            tar -zxvf /home/docker-koa.tar.gz
+            tar -zxvf /home/docker-koa/docker-koa.tar.gz
             docker-compose up -d --force-recreate --build
 
