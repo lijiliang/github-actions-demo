@@ -5,11 +5,11 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ node-nuxtjs ]
   pull_request:
     types: [closed]
     branches:
-      - master
+      - node-nuxtjs
 
 jobs:
   deploy:
@@ -25,4 +25,4 @@ jobs:
           username: ${{ secrets.ALIYUM_USER }}
           password: ${{ secrets.ALIYUM_PWD }}
           port: ${{secrets.ALIYUM_PORT }}
-          script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
+          script: sh ${{ secrets.PATH }}/github-actions-demo/.deploy/main.sh
