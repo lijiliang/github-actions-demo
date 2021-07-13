@@ -25,4 +25,5 @@ jobs:
           username: ${{ secrets.ALIYUM_USER }}
           password: ${{ secrets.ALIYUM_PWD }}
           port: ${{secrets.ALIYUM_PORT }}
-          script: sh ${{ secrets.PATH }}/.deploy/main.sh
+          # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
+          script: sh ../../.deploy/main.sh
