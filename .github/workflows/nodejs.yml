@@ -30,6 +30,7 @@ jobs:
       - name: Move files and compress
         run: |
           mkdir -p transfer_files
+          mv ./.deploy ./transfer_files/.deploy
           mv ./nginx ./transfer_files/nginx
           mv ./app.js ./transfer_files/app.js
           mv ./docker-compose.yml ./transfer_files/docker-compose.yml
