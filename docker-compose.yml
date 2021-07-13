@@ -1,0 +1,24 @@
+version: "2"
+services:
+  nginx:
+    restart: always
+    image: nginx:1.19.7
+    volumes:
+      #~/Documents/docker/test/nginx为本机目录, /etc/nginx为容器目录, port同理
+      # - /Users/benson/workspace/gitlab/docker-koa/nginx:/etc/nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 80:80
+    links:
+      #建立连接,web容器就无需暴露端口出去
+      - app
+  app:
+    #指定container的名称, 后续方便使用命令进入到容器内以及与nginx.conf相对应
+    container_name: appkoa
+    #构建容器
+    build: .
+    volumes:
+      #- ~/Users/benson/workspace/gitlab/docker-koa:/usr/src/app
+      - .:/usr/src/app
+    ports:
+      - "3000:3000"

@@ -1,7 +1,31 @@
-This repo is a GitHub Actions demo of publishing a React App into GitHub Pages.
 
-View the [workflow file](./.github/workflows/ci.yml) and the [published website](https://ruanyf.github.io/github-actions-demo).
+## jenkins配置
 
-Read the details in [my blog](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html) (in Chinese).
+### Build
+```bash
+#npm install -g @vue/cli
+# rm -rf node_modules
+#npm install -g cnpm --registry=https://registry.npm.taobao.org
+#cnpm install
+#npm i copy-webpack-plugin
+npm install --registry=https://registry.npm.taobao.org
+npm run build:beta
+cd ./dist/
+sleep 1s
+sudo tar -zcvf ../kyani_erp_admin.zip *
+```
 
-## Github action
+### Send build artifacts over SSH
+
+Source files: kyani_erp_admin.zip
+Remote directory: release/kyani_erp_admin
+
+Exec command 配置如下：
+```bash
+sudo mkdir /data/www
+sudo mkdir /data/www/kyani_erp_admin
+sudo tar -xvf /home/centos/release/kyani_erp_admin/kyani_erp_admin.zip -C  /data/www/kyani_erp_admin/
+sudo chmod 777 /data/www/kyani_erp_admin/bin/run-beta.sh
+sudo chmod 777 /data/www/kyani_erp_admin/bin/docker-run-beta.sh
+sudo sh /data/www/kyani_erp_admin/bin/docker-run-beta.sh
+```

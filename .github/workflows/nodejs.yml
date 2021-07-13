@@ -1,0 +1,73 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ node-nuxtjs ]
+  pull_request:
+    types: [closed]
+    branches:
+      - node-nuxtjs
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    name: Deploy to server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+      - name: Install and Build
+        run: |
+          npm install
+
+      #  将构建好的文件打包
+      - name: Move files and compress
+        run: |
+          # cd ./dist/
+          # sleep 1s
+          # sudo tar -zcvf ../node-koa.zip *
+
+          mkdir -p transfer_files
+          mv ./.deploy ./transfer_files/.deploy
+          mv ./nginx ./transfer_files/nginx
+          mv ./app.js ./transfer_files/app.js
+          mv ./docker-compose.yml ./transfer_files/docker-compose.yml
+          mv ./Dockerfile ./transfer_files/Dockerfile
+          mv ./package.json ./transfer_files/package.json
+          mv ./package-lock.json ./transfer_files/package-lock.json
+          mv ./process.json ./transfer_files/process.json
+          tar -zcvf transfer_files.tar.gz transfer_files/
+
+      # 使用Scp脚本拷贝到服务器
+      - name: Scp file to aliyun
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.ALIYUM_HOST }}
+          username: ${{ secrets.ALIYUM_USER }}
+          password: ${{ secrets.ALIYUM_PWD }}
+          port: ${{ secrets.ALIYUM_PORT }}
+          source: "transfer_files.tar.gz"
+          target: "/home"
+
+      - name: Exec deploy script with SSH
+        uses: appleboy/ssh-action@master
+        with:
+          command_timeout: 8m
+          host: ${{ secrets.ALIYUM_HOST }}
+          username: ${{ secrets.ALIYUM_USER }}
+          password: ${{ secrets.ALIYUM_PWD }}
+          port: ${{secrets.ALIYUM_PORT }}
+          # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
+          script: |
+            cd /home
+            tar -zxvf /home/transfer_files.tar.gz
+            sh /home/transfer_files/.deploy/main.sh
+            cd /home/transfer_files
+            docker-compose up -d --force-recreate --build
+
