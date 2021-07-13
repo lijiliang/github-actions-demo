@@ -59,10 +59,10 @@ jobs:
           password: ${{ secrets.ALIYUM_PWD }}
           port: ${{secrets.ALIYUM_PORT }}
           # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
-          # script: sh /home/runner/work/github-actions-demo/github-actions-demo/.deploy/main.sh
           script: |
             cd /home
             tar -zxvf /home/transfer_files.tar.gz
+            sh /home/transfer_files/.deploy/main.sh
             cd /home/transfer_files
             docker-compose up -d --force-recreate --build
 

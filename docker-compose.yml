@@ -5,7 +5,7 @@ services:
     image: nginx:1.19.7
     volumes:
       #~/Documents/docker/test/nginx为本机目录, /etc/nginx为容器目录, port同理
-      # - /Users/benson/workspace/gitlab/docker-koa/nginx:/etc/nginx 
+      # - /Users/benson/workspace/gitlab/docker-koa/nginx:/etc/nginx
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 80:80
