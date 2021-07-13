@@ -26,4 +26,4 @@ jobs:
           password: ${{ secrets.ALIYUM_PWD }}
           port: ${{secrets.ALIYUM_PORT }}
           # script: sh ${{ secrets.PATH }}/blog-front/.deploy/main.sh
-          script: sh ../../.deploy/main.sh
+          script: sh /home/runner/work/github-actions-demo/github-actions-demo/.deploy/main.sh
