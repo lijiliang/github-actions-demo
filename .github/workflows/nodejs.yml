@@ -29,6 +29,10 @@ jobs:
       #  将构建好的文件打包
       - name: Move files and compress
         run: |
+          # cd ./dist/
+          # sleep 1s
+          # sudo tar -zcvf ../node-koa.zip *
+
           mkdir -p transfer_files
           mv ./.deploy ./transfer_files/.deploy
           mv ./nginx ./transfer_files/nginx
@@ -38,7 +42,7 @@ jobs:
           mv ./package.json ./transfer_files/package.json
           mv ./package-lock.json ./transfer_files/package-lock.json
           mv ./process.json ./transfer_files/process.json
-          tar -zcvf  transfer_files.tar.gz transfer_files/
+          tar -zcvf transfer_files.tar.gz transfer_files/
 
       # 使用Scp脚本拷贝到服务器
       - name: Scp file to aliyun
