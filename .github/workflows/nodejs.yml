@@ -27,7 +27,7 @@ jobs:
           npm install
 
       #  将构建好的文件打包
-       - name: Move files and compress
+      - name: Move files and compress
         run: |
           mkdir -p transfer_files
           mv ./nginx ./transfer_files/nginx
@@ -39,7 +39,7 @@ jobs:
           tar -zcvf  transfer_files.tar.gz transfer_files/
 
       # 使用Scp脚本拷贝到服务器
-       - name: Scp file to aliyun
+      - name: Scp file to aliyun
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.DOCKER_IP_DEV }}
