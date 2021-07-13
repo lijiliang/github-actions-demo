@@ -11,9 +11,10 @@ COPY package-lock.json /usr/src/app/
 
 RUN npm config set registry https://registry.npm.taobao.org/
 
+RUN npm config set unsafe-perm true
 RUN npm i --production
 RUN npm install pm2 -g
- 
+
 # RUN npm i --production --registry=https://registry.npm.taobao.org
 
 # 把当前目录下的所有文件拷贝到 Image 的 /usr/src/nodejs/ 目录下

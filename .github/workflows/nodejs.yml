@@ -64,6 +64,5 @@ jobs:
             cd /home
             tar -zxvf /home/transfer_files.tar.gz
             cd /home/transfer_files
-            docker-compose down
             docker-compose up -d --force-recreate --build
 
