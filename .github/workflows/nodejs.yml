@@ -35,6 +35,7 @@ jobs:
           mv ./docker-compose.yml ./transfer_files/docker-compose.yml
           mv ./Dockerfile ./transfer_files/Dockerfile
           mv ./package.json ./transfer_files/package.json
+          mv ./package-lock.json ./transfer_files/package-lock.json
           mv ./process.json ./transfer_files/process.json
           tar -zcvf  transfer_files.tar.gz transfer_files/
 
