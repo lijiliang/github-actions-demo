@@ -9,10 +9,10 @@
 ## 目录结构
 ```
 - compose   新建，线上环境配置
-- data      
-- conf      
+- data
+- conf
 - node_modules
-- static        
+- static
 - docker-compose.yml
 - docker-compose-prod.yml   新建，线上环境配置
 - package.json
@@ -64,7 +64,7 @@ CMD ["npm", "start"]    # 容器启动时运行
 ```
 FROM nginx:1.17
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./conf/default.conf /etc/nginx/conf.d/default.conf 
+COPY ./conf/default.conf /etc/nginx/conf.d/default.conf
 ```
 
 ### nginx conf域名设置
@@ -120,7 +120,7 @@ services:
         mysql:
                 image: mysql:5.6        # 直接使用镜像构建
                 env_file: .env          # 环境变量env，我们写入到了配置文件里，避免密码泄漏
-                volumes:    
+                volumes:
                         - db:/var/lib/mysql
                 ports:
                         - "3306:3306"
@@ -146,6 +146,16 @@ sudo docker-compose -f docker-compose-prod.yml up
 ```
 服务运行起来，如果你能通过`yoursite.com`访问的话，说明配置成功
 
+```bash
+// 构建并启动,加"-d"为后台启动
+docker-compose up
+
+// 停止
+docker-compose down
+
+// 强制重新构建并启
+docker-compose up --force-recreate --build
+```
 
 ## 正式上线
 我们只需要把源代码copy到服务器上然后运行上面两条命令即可
